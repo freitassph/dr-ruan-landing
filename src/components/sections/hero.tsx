@@ -55,7 +55,7 @@ export function HeroSection() {
             </div>
 
             {/* Content */}
-            <div className="relative z-10 w-full max-w-7xl mx-auto pt-24 pb-32 px-6 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            <div className="relative z-10 w-full max-w-7xl mx-auto pt-32 sm:pt-36 pb-32 px-6 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
 
                 {/* Left: Typography — NO parallax on mobile */}
                 <motion.div

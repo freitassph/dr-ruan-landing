@@ -86,7 +86,9 @@ html.lenis {
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    /* Safe Area: extend bg behind notch, pad bottom for home indicator */
+    /* Safe Area: background extends behind everything, content stays in safe zone */
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
     padding-bottom: env(safe-area-inset-bottom);
   }
 

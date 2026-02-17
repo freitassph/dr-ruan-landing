@@ -8,7 +8,10 @@ export function Footer() {
     const currentYear = new Date().getFullYear();
 
     return (
-        <footer className="bg-primary-dark text-white/60 pt-16 pb-10 lg:pb-20">
+        <footer
+            className="bg-primary-dark text-white/60 pt-16 pb-10 lg:pb-20"
+            style={{ paddingBottom: "calc(2.5rem + env(safe-area-inset-bottom))" }}
+        >
             <div className="mx-auto max-w-7xl px-6 md:px-12">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
                     {/* Brand */}
