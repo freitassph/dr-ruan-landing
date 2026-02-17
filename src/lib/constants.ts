@@ -143,7 +143,6 @@ export const NAV_LINKS = [
     { label: "Sobre", href: "/#sobre" },
     { label: "Especialidades", href: "/#especialidades" },
     { label: "Diferenciais", href: "/#diferenciais" },
-    { label: "Depoimentos", href: "/#depoimentos" },
     { label: "Contato", href: "/#contato" },
     { label: "FAQ", href: "/#faq" },
 ];

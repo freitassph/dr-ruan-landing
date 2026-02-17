@@ -68,13 +68,24 @@ export function Header() {
                     </Button>
                 </nav>
 
-                {/* Mobile Menu Toggle (Hamburguer) */}
+                {/* Mobile Menu Toggle (Animated) */}
                 <button
-                    className="lg:hidden relative z-50 p-2 -mr-2 text-white/90 hover:text-white transition-colors"
+                    className="lg:hidden relative z-50 w-12 h-12 flex flex-col justify-center items-center group gap-1.5 focus:outline-none rounded-full hover:bg-white/5 transition-colors"
                     onClick={() => setIsMobileMenuOpen(true)}
                     aria-label="Abrir menu"
                 >
-                    <Menu size={32} />
+                    <motion.span
+                        animate={{ rotate: 0, y: 0, backgroundColor: "#ffffff" }}
+                        className="w-7 h-[2px] block origin-center transition-all duration-300 group-hover:w-8"
+                    />
+                    <motion.span
+                        animate={{ opacity: 1, backgroundColor: "#ffffff" }}
+                        className="w-5 h-[2px] block ml-auto transition-all duration-300 group-hover:w-7"
+                    />
+                    <motion.span
+                        animate={{ rotate: 0, y: 0, backgroundColor: "#ffffff" }}
+                        className="w-7 h-[2px] block origin-center transition-all duration-300 group-hover:w-8"
+                    />
                 </button>
             </div>
 
@@ -86,7 +97,7 @@ export function Header() {
                         animate={{ opacity: 1, x: 0 }}
                         exit={{ opacity: 0, x: "100%", transition: { duration: 0.3 } }}
                         transition={{ type: "spring", damping: 25, stiffness: 200 }}
-                        className="fixed inset-0 z-[9999] bg-slate-950/95 backdrop-blur-xl lg:hidden flex flex-col overflow-hidden h-[100dvh]"
+                        className="fixed inset-0 z-[9999] bg-primary lg:hidden flex flex-col overflow-hidden h-[100dvh] overscroll-none"
                     >
                         {/* Header do Menu Mobile (Botão Fechar) */}
                         <div className="flex items-center justify-end p-6 h-20 border-b border-white/5">

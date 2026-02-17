@@ -12,6 +12,16 @@ const playfair = Playfair_Display({
     display: "swap",
 });
 
+import type { Viewport } from "next";
+
+export const viewport: Viewport = {
+    themeColor: "#0D3D3D",
+    width: "device-width",
+    initialScale: 1,
+    maximumScale: 1,
+    userScalable: false, // Prevent zoom on mobile inputs
+};
+
 export const metadata: Metadata = {
     title: {
         default: "Dr. Ruan Krubniki Ferraz | Neurocirurgia de Excelência",
