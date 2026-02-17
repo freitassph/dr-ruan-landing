@@ -2,11 +2,11 @@
 
 import React, { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
-import { Menu, X, Brain, MessageCircle } from "lucide-react";
+import { X, MessageCircle } from "lucide-react";
 import { NAV_LINKS, DOCTOR } from "@/lib/constants";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
-import Link from "next/link"; // Use Next.js Link for optimization
+import Link from "next/link";
 
 export function Header() {
     const [isScrolled, setIsScrolled] = useState(false);
@@ -30,17 +30,20 @@ export function Header() {
     return (
         <header
             className={cn(
-                "absolute lg:fixed top-0 left-0 right-0 z-[999] transition-colors duration-300 border-b border-transparent h-20 flex items-center",
+                "absolute lg:fixed top-0 left-0 right-0 z-[999] transition-all duration-300 border-b border-transparent flex items-end",
                 isScrolled
                     ? "lg:bg-primary/95 lg:backdrop-blur-md lg:border-white/5 lg:shadow-lg"
                     : "bg-transparent"
             )}
+            style={{
+                paddingTop: "env(safe-area-inset-top)",
+                minHeight: "calc(5rem + env(safe-area-inset-top))",
+            }}
         >
-            <div className="w-full mx-auto max-w-7xl px-6 md:px-12 flex items-center justify-between gap-8">
+            <div className="w-full mx-auto max-w-7xl px-6 md:px-12 flex items-center justify-between gap-8 h-20">
 
                 {/* Logo Area */}
                 <Link href="/#inicio" className="flex items-center gap-3 group relative z-50 shrink-0" aria-label="Ir ao início">
-
                     <div className="hidden sm:flex flex-col justify-center">
                         <p className="text-sm md:text-base font-serif font-bold text-white tracking-wide leading-none whitespace-nowrap">
                             Dr. Ruan Krubniki
@@ -68,97 +71,121 @@ export function Header() {
                     </Button>
                 </nav>
 
-                {/* Mobile Menu Toggle (Animated) */}
+                {/* Mobile Menu Toggle (3 Linhas Animadas) */}
                 <button
-                    className="lg:hidden relative z-50 w-12 h-12 flex flex-col justify-center items-center group gap-1.5 focus:outline-none rounded-full hover:bg-white/5 transition-colors"
+                    className="lg:hidden relative z-50 w-12 h-12 flex flex-col justify-center items-center group gap-1.5 focus:outline-none"
                     onClick={() => setIsMobileMenuOpen(true)}
                     aria-label="Abrir menu"
                 >
-                    <motion.span
-                        animate={{ rotate: 0, y: 0, backgroundColor: "#ffffff" }}
-                        className="w-7 h-[2px] block origin-center transition-all duration-300 group-hover:w-8"
-                    />
-                    <motion.span
-                        animate={{ opacity: 1, backgroundColor: "#ffffff" }}
-                        className="w-5 h-[2px] block ml-auto transition-all duration-300 group-hover:w-7"
-                    />
-                    <motion.span
-                        animate={{ rotate: 0, y: 0, backgroundColor: "#ffffff" }}
-                        className="w-7 h-[2px] block origin-center transition-all duration-300 group-hover:w-8"
-                    />
+                    <span className="w-7 h-[2px] bg-white block origin-center transition-all duration-300 group-hover:w-8" />
+                    <span className="w-5 h-[2px] bg-white/70 block ml-auto transition-all duration-300 group-hover:w-7" />
+                    <span className="w-7 h-[2px] bg-white block origin-center transition-all duration-300 group-hover:w-8" />
                 </button>
             </div>
 
-            {/* Premium Fullscreen Mobile Overlay */}
+            {/* ═══════════════════════════════════════════
+                 MENU MOBILE — Fullscreen Premium Overlay
+                ═══════════════════════════════════════════ */}
             <AnimatePresence>
                 {isMobileMenuOpen && (
                     <motion.div
-                        initial={{ opacity: 0, x: "100%" }}
-                        animate={{ opacity: 1, x: 0 }}
-                        exit={{ opacity: 0, x: "100%", transition: { duration: 0.3 } }}
-                        transition={{ type: "spring", damping: 25, stiffness: 200 }}
-                        className="fixed inset-0 z-[9999] bg-primary lg:hidden flex flex-col overflow-hidden h-[100dvh] overscroll-none"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.3 }}
+                        className="fixed inset-0 z-[9999] lg:hidden"
+                        style={{ height: "100dvh" }}
                     >
-                        {/* Header do Menu Mobile (Botão Fechar) */}
-                        <div className="flex items-center justify-end p-6 h-20 border-b border-white/5">
-                            <button
-                                onClick={() => setIsMobileMenuOpen(false)}
-                                className="p-2 -mr-2 text-white/50 hover:text-white transition-colors rounded-full hover:bg-white/10"
-                                aria-label="Fechar menu"
-                            >
-                                <X size={32} />
-                            </button>
-                        </div>
+                        {/* Fundo sólido + gradiente premium */}
+                        <div className="absolute inset-0 bg-gradient-to-b from-primary-dark via-primary to-primary-dark" />
 
-                        {/* Conteúdo do Menu (com Scroll se necessário) */}
-                        <nav className="flex-1 flex flex-col items-center justify-center gap-6 overflow-y-auto w-full px-6 py-8">
-                            {NAV_LINKS.map((link, i) => (
-                                <motion.div
-                                    key={link.href}
-                                    initial={{ opacity: 0, y: 20 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    transition={{ delay: 0.1 + i * 0.05 }}
-                                    className="w-full text-center"
-                                >
-                                    <Link
-                                        href={link.href}
+                        {/* Decoração sutil — radial glow dourado */}
+                        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(198,161,48,0.08)_0%,_transparent_60%)] pointer-events-none" />
+                        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_rgba(198,161,48,0.05)_0%,_transparent_50%)] pointer-events-none" />
+
+                        {/* Linha dourada decorativa no topo */}
+                        <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-gold/30 to-transparent" />
+
+                        {/* Conteúdo do Menu — Posição relativa */}
+                        <div className="relative z-10 flex flex-col h-full">
+
+                            {/* Barra Superior — Botão Fechar */}
+                            <div
+                                className="flex items-end justify-end px-6 md:px-12"
+                                style={{
+                                    paddingTop: "env(safe-area-inset-top)",
+                                    minHeight: "calc(5rem + env(safe-area-inset-top))",
+                                }}
+                            >
+                                <div className="h-20 flex items-center">
+                                    <button
                                         onClick={() => setIsMobileMenuOpen(false)}
-                                        className="text-2xl sm:text-3xl font-serif text-white hover:text-gold transition-colors block py-2"
+                                        className="w-12 h-12 flex items-center justify-center text-white/60 hover:text-gold transition-colors duration-300 rounded-full hover:bg-white/5"
+                                        aria-label="Fechar menu"
                                     >
-                                        {link.label}
-                                    </Link>
-                                </motion.div>
-                            ))}
+                                        <X size={28} strokeWidth={1.5} />
+                                    </button>
+                                </div>
+                            </div>
 
-                            <motion.div
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ delay: 0.5 }}
-                                className="mt-6 w-full flex justify-center"
-                            >
-                                <Button
-                                    variant="primary"
-                                    size="lg"
-                                    href={DOCTOR.whatsapp}
-                                    onClick={() => setIsMobileMenuOpen(false)}
-                                    className="w-full max-w-xs text-center justify-center text-lg py-6"
+                            {/* Links de Navegação — Centralizado verticalmente */}
+                            <nav className="flex-1 flex flex-col items-center justify-center gap-1 px-8">
+                                {NAV_LINKS.map((link, i) => (
+                                    <motion.div
+                                        key={link.href}
+                                        initial={{ opacity: 0, y: 15 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        transition={{ delay: 0.05 + i * 0.06, duration: 0.4, ease: "easeOut" }}
+                                        className="w-full"
+                                    >
+                                        <Link
+                                            href={link.href}
+                                            onClick={() => setIsMobileMenuOpen(false)}
+                                            className="block text-center py-4 text-2xl sm:text-3xl font-serif text-white/90 hover:text-gold active:text-gold transition-colors duration-200 tracking-wide"
+                                        >
+                                            {link.label}
+                                        </Link>
+                                        {/* Separador sutil entre itens */}
+                                        {i < NAV_LINKS.length - 1 && (
+                                            <div className="w-12 h-[0.5px] bg-white/10 mx-auto" />
+                                        )}
+                                    </motion.div>
+                                ))}
+
+                                {/* CTA Principal */}
+                                <motion.div
+                                    initial={{ opacity: 0, y: 15 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ delay: 0.4, duration: 0.4 }}
+                                    className="mt-8 w-full max-w-xs"
                                 >
-                                    Agendar Agora
-                                </Button>
-                            </motion.div>
+                                    <Button
+                                        variant="primary"
+                                        size="lg"
+                                        href={DOCTOR.whatsapp}
+                                        onClick={() => setIsMobileMenuOpen(false)}
+                                        className="w-full justify-center text-base py-5 rounded-full shadow-gold-glow"
+                                        icon={MessageCircle}
+                                    >
+                                        Agendar Consulta
+                                    </Button>
+                                </motion.div>
+                            </nav>
 
-                            {/* Contact Info */}
+                            {/* Rodapé do Menu */}
                             <motion.div
                                 initial={{ opacity: 0 }}
                                 animate={{ opacity: 1 }}
-                                transition={{ delay: 0.6 }}
-                                className="mt-auto pt-8 text-center pb-8"
+                                transition={{ delay: 0.5 }}
+                                className="py-8 text-center"
+                                style={{ paddingBottom: "calc(2rem + env(safe-area-inset-bottom))" }}
                             >
-                                <p className="text-white/30 text-xs uppercase tracking-widest">
-                                    {DOCTOR.clinic.city} &bull; {DOCTOR.clinic.state}
+                                <p className="text-white/25 text-[10px] uppercase tracking-[0.3em] font-medium">
+                                    {DOCTOR.clinic.city} • {DOCTOR.clinic.state}
                                 </p>
+                                <div className="w-8 h-[0.5px] bg-gold/20 mx-auto mt-3" />
                             </motion.div>
-                        </nav>
+                        </div>
                     </motion.div>
                 )}
             </AnimatePresence>

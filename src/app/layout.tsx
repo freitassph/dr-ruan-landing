@@ -19,7 +19,8 @@ export const viewport: Viewport = {
     width: "device-width",
     initialScale: 1,
     maximumScale: 1,
-    userScalable: false, // Prevent zoom on mobile inputs
+    userScalable: false,
+    viewportFit: "cover", // Extend page behind notch/Dynamic Island
 };
 
 export const metadata: Metadata = {

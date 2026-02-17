@@ -12,11 +12,11 @@ interface SectionProps {
 }
 
 const sectionVariants = {
-    hidden: { opacity: 0, y: 40 },
+    hidden: { opacity: 0, y: 20 },
     visible: {
         opacity: 1,
         y: 0,
-        transition: { duration: 0.8, ease: "easeOut" },
+        transition: { duration: 0.6, ease: "easeOut" },
     },
 };
 
@@ -26,7 +26,7 @@ export function Section({ id, className, children, dark = false }: SectionProps)
             id={id}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
+            viewport={{ once: true, margin: "-50px" }}
             variants={sectionVariants}
             className={cn(
                 "relative py-20 px-6 md:px-12 overflow-hidden",

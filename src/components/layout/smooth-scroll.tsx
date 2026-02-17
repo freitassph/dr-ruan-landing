@@ -4,25 +4,28 @@ import React, { useLayoutEffect, useState, useEffect } from 'react'
 import { ReactLenis } from 'lenis/react'
 import { usePathname } from 'next/navigation'
 
-
 export function SmoothScroll({ children }: { children: React.ReactNode }) {
     const pathname = usePathname()
-    const [isMobile, setIsMobile] = useState(true);
+    const [isDesktop, setIsDesktop] = useState(false);
 
     useLayoutEffect(() => {
         window.scrollTo(0, 0);
     }, [pathname]);
 
     useEffect(() => {
-        const checkMobile = () => {
-            setIsMobile(window.innerWidth < 1024 || 'ontouchstart' in window);
+        const checkDesktop = () => {
+            // Only enable Lenis on large screens (desktop)
+            // Do NOT use 'ontouchstart' check — MacBooks have it too
+            setIsDesktop(window.innerWidth >= 1024);
         };
-        checkMobile();
-        window.addEventListener('resize', checkMobile);
-        return () => window.removeEventListener('resize', checkMobile);
+        checkDesktop();
+        window.addEventListener('resize', checkDesktop);
+        return () => window.removeEventListener('resize', checkDesktop);
     }, []);
 
-    if (isMobile) {
+    // Mobile & Tablet: Native scroll (best UX)
+    // Desktop: Lenis smooth scroll (elegant)
+    if (!isDesktop) {
         return <>{children}</>;
     }
 

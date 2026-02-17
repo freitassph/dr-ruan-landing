@@ -144,5 +144,5 @@ export const NAV_LINKS = [
     { label: "Especialidades", href: "/#especialidades" },
     { label: "Diferenciais", href: "/#diferenciais" },
     { label: "Contato", href: "/#contato" },
-    { label: "FAQ", href: "/#faq" },
+    { label: "Dúvidas", href: "/#faq" },
 ];

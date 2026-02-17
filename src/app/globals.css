@@ -86,6 +86,8 @@ html.lenis {
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    /* Safe Area: extend bg behind notch, pad bottom for home indicator */
+    padding-bottom: env(safe-area-inset-bottom);
   }
 
   /* Cinematic Grain Overlay - Removes "Plastic AI" feel */

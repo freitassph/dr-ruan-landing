@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { DOCTOR, HERO_CONTENT } from "@/lib/constants";
 import { motion, useScroll, useTransform } from "framer-motion";
@@ -9,10 +9,19 @@ import { ArrowRight, MessageCircle, GraduationCap, Globe } from "lucide-react";
 export function HeroSection() {
     const containerRef = useRef<HTMLDivElement>(null);
     const { scrollY } = useScroll();
+    const [isMobile, setIsMobile] = useState(false);
 
-    const y1 = useTransform(scrollY, [0, 500], [0, 200]);
-    const y2 = useTransform(scrollY, [0, 500], [0, -150]);
-    const opacity = useTransform(scrollY, [0, 300], [1, 0]);
+    useEffect(() => {
+        const check = () => setIsMobile(window.innerWidth < 1024);
+        check();
+        window.addEventListener("resize", check);
+        return () => window.removeEventListener("resize", check);
+    }, []);
+
+    // Parallax transforms — ONLY for desktop
+    const y1 = useTransform(scrollY, [0, 500], [0, isMobile ? 0 : 200]);
+    const y2 = useTransform(scrollY, [0, 500], [0, isMobile ? 0 : -150]);
+    const opacity = useTransform(scrollY, [0, 300], [1, isMobile ? 1 : 0]);
 
     return (
         <section
@@ -24,16 +33,16 @@ export function HeroSection() {
             <div className="absolute inset-0 z-0">
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,_#0D3D3D_0%,_#051818_100%)]" />
 
-                {/* Animated Orbs - Optimized */}
+                {/* Animated Orbs — Reduced on mobile */}
                 <motion.div
                     animate={{ scale: [1, 1.1, 1], opacity: [0.2, 0.3, 0.2] }}
                     transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-                    className="absolute top-[-10%] right-[-10%] w-[800px] h-[800px] rounded-full bg-gold/5 blur-[80px] will-change-transform"
+                    className="absolute top-[-10%] right-[-10%] w-[400px] lg:w-[800px] h-[400px] lg:h-[800px] rounded-full bg-gold/5 blur-[60px] lg:blur-[80px] will-change-transform"
                 />
                 <motion.div
                     animate={{ scale: [1.1, 1, 1.1], opacity: [0.1, 0.2, 0.1] }}
                     transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                    className="absolute bottom-[-10%] left-[-10%] w-[600px] h-[600px] rounded-full bg-primary-light/10 blur-[60px] will-change-transform"
+                    className="absolute bottom-[-10%] left-[-10%] w-[300px] lg:w-[600px] h-[300px] lg:h-[600px] rounded-full bg-primary-light/10 blur-[40px] lg:blur-[60px] will-change-transform"
                 />
 
                 {/* Subtle Dot Grid */}
@@ -48,9 +57,9 @@ export function HeroSection() {
             {/* Content */}
             <div className="relative z-10 w-full max-w-7xl mx-auto pt-24 pb-32 px-6 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
 
-                {/* Left: Typography */}
+                {/* Left: Typography — NO parallax on mobile */}
                 <motion.div
-                    style={{ y: y1 }}
+                    style={isMobile ? {} : { y: y1 }}
                     className="lg:col-span-8 flex flex-col justify-center"
                 >
                     {/* Badge */}
@@ -66,7 +75,7 @@ export function HeroSection() {
                         </span>
                     </motion.div>
 
-                    {/* Headline - Fluid Typography for Perfect Fit */}
+                    {/* Headline - Fluid Typography */}
                     <div className="overflow-hidden py-8 -my-8 pr-4 pl-1">
                         <motion.h1
                             initial={{ y: "100%" }}
@@ -76,7 +85,6 @@ export function HeroSection() {
                                        text-4xl xs:text-5xl sm:text-[3.75rem] md:text-[4.5rem] lg:text-[5.5rem] xl:text-[6rem]"
                         >
                             {HERO_CONTENT.headline} <br />
-                            {/* <span className="text-white/40 italic font-light pr-2 sm:pr-4">em</span> */}
                             <span className="text-gold italic font-normal pb-6 pr-4 inline-block -mb-6 tracking-tight drop-shadow-sm">
                                 {HERO_CONTENT.headlineHighlight}
                             </span>
@@ -93,7 +101,7 @@ export function HeroSection() {
                         Especialista pela <strong className="text-white font-medium">USP-RP</strong> e com fellowship na <strong className="text-white font-medium">Itália</strong>, Dr. Ruan combina a técnica mais avançada da neurocirurgia com um olhar atento e humano para cada paciente.
                     </motion.p>
 
-                    {/* CTAs with Tactile Feedback */}
+                    {/* CTAs */}
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -121,7 +129,7 @@ export function HeroSection() {
                         </a>
                     </motion.div>
 
-                    {/* Mobile Authority Badges (Visible on Mobile/Tablet only) */}
+                    {/* Mobile Authority Badges */}
                     <div className="mt-12 flex flex-col sm:flex-row gap-6 lg:hidden border-t border-white/10 pt-8 w-full">
                         <motion.div
                             initial={{ opacity: 0, x: -20 }}
@@ -157,9 +165,9 @@ export function HeroSection() {
                     </div>
                 </motion.div>
 
-                {/* Right: Floating Glass Cards */}
+                {/* Right: Floating Glass Cards — Desktop only */}
                 <motion.div
-                    style={{ y: y2 }}
+                    style={isMobile ? {} : { y: y2 }}
                     className="lg:col-span-4 relative h-[600px] hidden lg:block"
                 >
                     <motion.div
@@ -194,10 +202,10 @@ export function HeroSection() {
                 </motion.div>
             </div>
 
-            {/* Scroll Indicator */}
+            {/* Scroll Indicator — Desktop only */}
             <motion.div
                 style={{ opacity }}
-                className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+                className="absolute bottom-10 left-1/2 -translate-x-1/2 flex-col items-center gap-2 hidden lg:flex"
             >
                 <span className="text-[10px] uppercase tracking-[0.3em] text-white/30">Scroll</span>
                 <div className="w-[1px] h-12 bg-gradient-to-b from-gold to-transparent" />
