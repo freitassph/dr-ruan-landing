@@ -36,7 +36,7 @@ export function AboutSection() {
 
                             {/* Doctor's Photo - Optimized */}
                             <NextImage
-                                src="/dr-ruan.avif"
+                                src="/dr-ruan.jpg"
                                 alt="Dr. Ruan Krubniki Ferraz - Neurocirurgião"
                                 fill
                                 className="object-cover object-center"

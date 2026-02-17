@@ -30,7 +30,7 @@ export const metadata: Metadata = {
         description: "Neurocirurgia avançada com formação USP e fellowship internacional. Cuidado humano e tecnologia de ponta.",
         siteName: "Dr. Ruan Krubniki",
         images: [{
-            url: "/dr-ruan.avif",
+            url: "/dr-ruan.jpg",
             width: 1200,
             height: 630,
             alt: "Dr. Ruan Krubniki"
@@ -40,16 +40,16 @@ export const metadata: Metadata = {
         card: "summary_large_image",
         title: "Dr. Ruan Krubniki | Neurocirurgião",
         description: "Neurocirurgia de Excelência em Gurupi-TO.",
-        images: ["/dr-ruan.avif"],
+        images: ["/dr-ruan.jpg"],
     },
     robots: {
         index: true,
         follow: true,
     },
     icons: {
-        icon: "/favicon.avif",
-        shortcut: "/favicon.avif",
-        apple: "/favicon.avif",
+        icon: "/favicon.png",
+        shortcut: "/favicon.png",
+        apple: "/favicon.png",
     },
 };
 
