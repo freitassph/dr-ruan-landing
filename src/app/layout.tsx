@@ -21,11 +21,11 @@ export const metadata: Metadata = {
     keywords: ["Neurocirurgião", "Gurupi", "Tocantins", "Cirurgia de Coluna", "Parkinson", "DBS", "Tumores Cerebrais", "Dr. Ruan Krubniki"],
     authors: [{ name: "Dr. Ruan Krubniki Ferraz" }],
     creator: "Agência AIOS",
-    metadataBase: new URL('https://drruankrubnikiferraz.com'), // Production URL
+    metadataBase: new URL('https://drruankrubnik.vercel.app'),
     openGraph: {
         type: "website",
         locale: "pt_BR",
-        url: "https://drruankrubnikiferraz.com",
+        url: "https://drruankrubnik.vercel.app",
         title: "Dr. Ruan Krubniki | Neurocirurgião",
         description: "Neurocirurgia avançada com formação USP e fellowship internacional. Cuidado humano e tecnologia de ponta.",
         siteName: "Dr. Ruan Krubniki",
