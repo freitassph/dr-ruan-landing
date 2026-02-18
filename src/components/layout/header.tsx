@@ -90,15 +90,15 @@ export function Header() {
                     </Button>
                 </nav>
 
-                {/* Mobile Hamburger */}
+                {/* Mobile Hamburger — Aumentado para 56px touch target */}
                 <button
-                    className="lg:hidden relative z-50 w-12 h-12 flex flex-col justify-center items-center gap-[6px] focus:outline-none"
+                    className="lg:hidden relative z-50 w-14 h-14 flex flex-col justify-center items-center gap-[6px] focus:outline-none cursor-pointer active:scale-95 transition-transform"
                     onClick={() => setIsMobileMenuOpen(true)}
                     aria-label="Abrir menu"
                 >
-                    <span className="w-6 h-[1.5px] bg-white block transition-all duration-300" />
-                    <span className="w-4 h-[1.5px] bg-white/70 block ml-auto transition-all duration-300" />
-                    <span className="w-6 h-[1.5px] bg-white block transition-all duration-300" />
+                    <span className="w-6 h-[1.5px] bg-white block transition-all duration-300 pointer-events-none" />
+                    <span className="w-4 h-[1.5px] bg-white/70 block ml-auto transition-all duration-300 pointer-events-none" />
+                    <span className="w-6 h-[1.5px] bg-white block transition-all duration-300 pointer-events-none" />
                 </button>
             </div>
 
@@ -129,14 +129,14 @@ export function Header() {
                                 paddingRight: "env(safe-area-inset-right)",
                             }}
                         >
-                            {/* Botão Fechar */}
+                            {/* Botão Fechar — Aumentado para 56px touch target */}
                             <div className="flex items-center justify-end px-4 sm:px-6 h-20 shrink-0">
                                 <button
                                     onClick={() => setIsMobileMenuOpen(false)}
-                                    className="w-12 h-12 flex items-center justify-center text-white/50 hover:text-gold transition-colors duration-200 rounded-full"
+                                    className="w-14 h-14 flex items-center justify-center text-white/50 hover:text-gold transition-all duration-200 rounded-full active:scale-95 cursor-pointer"
                                     aria-label="Fechar menu"
                                 >
-                                    <X size={24} strokeWidth={1.5} />
+                                    <X size={28} strokeWidth={1.5} className="pointer-events-none" />
                                 </button>
                             </div>
 
