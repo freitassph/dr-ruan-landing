@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Brain, Instagram, Mail, Phone, MapPin } from "lucide-react";
+import { Brain, Instagram, Mail, Phone, MapPin, ShieldCheck } from "lucide-react";
 import { DOCTOR, NAV_LINKS } from "@/lib/constants";
 
 export function Footer() {
@@ -86,11 +86,17 @@ export function Footer() {
 
                 {/* Bottom Bar */}
                 <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
-                    <div className="text-xs text-center md:text-left flex flex-col sm:flex-row gap-2 sm:gap-4 items-center">
-                        <p>© {currentYear} {DOCTOR.name}. Todos os direitos reservados.</p>
-                        <a href="/politica-de-privacidade" className="hidden sm:inline border-r border-white/20 h-3" aria-hidden="true" />
-                        <a href="/politica-de-privacidade" className="hover:text-gold transition-colors underline decoration-white/30 underline-offset-4">
-                            Política de Privacidade
+                    <div className="text-sm text-center md:text-left flex flex-col sm:flex-row gap-4 sm:gap-6 items-center flex-wrap justify-center md:justify-start text-white/60">
+                        <p>© {currentYear} {DOCTOR.name}.</p>
+                        <a
+                            href="/politica-de-privacidade"
+                            className="group flex items-center gap-2 px-4 py-2 sm:px-0 sm:py-0 rounded-lg bg-white/5 sm:bg-transparent hover:bg-white/10 sm:hover:bg-transparent transition-all duration-300"
+                            aria-label="Leia nossa Política de Privacidade"
+                        >
+                            <ShieldCheck size={15} className="text-gold/80 group-hover:text-gold transition-colors" />
+                            <span className="group-hover:text-white transition-colors underline decoration-white/20 underline-offset-4 decoration-1">
+                                Política de Privacidade
+                            </span>
                         </a>
                     </div>
                     <p className="text-xs text-center md:text-right">
