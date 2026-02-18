@@ -23,10 +23,10 @@ export function AboutSection() {
                 {/* Left: Sticky Image Area */}
                 <div className="w-full max-w-md mx-auto lg:max-w-none lg:w-5/12 relative">
                     <motion.div
-                        initial={{ opacity: 0, scale: 0.95 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
                         viewport={{ once: true, amount: 0.1 }}
-                        transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+                        transition={{ duration: 0.6, ease: "easeOut" }}
                         className="sticky top-0 lg:top-32"
                     >
                         {/* Image Frame */}
@@ -40,9 +40,9 @@ export function AboutSection() {
                                 alt="Dr. Ruan Krubniki Ferraz - Neurocirurgião"
                                 fill
                                 className="object-cover object-center"
-                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                                quality={90}
-                                priority
+                                sizes="(max-width: 768px) 90vw, (max-width: 1200px) 45vw, 33vw"
+                                quality={75}
+                                loading="lazy"
                             />
 
                             {/* Floating Name Overlay */}

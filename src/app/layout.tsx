@@ -6,11 +6,17 @@ import { SmoothScroll } from "@/components/layout/smooth-scroll";
 import { CookieBanner } from "@/components/layout/cookie-banner";
 import { MenuProvider } from "@/components/layout/menu-context";
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
+const inter = Inter({
+    subsets: ["latin"],
+    variable: "--font-inter",
+    display: "swap",   // Evita render-blocking
+    preload: true,
+});
 const playfair = Playfair_Display({
     subsets: ["latin"],
     variable: "--font-playfair",
     display: "swap",
+    preload: true,
 });
 
 import type { Viewport } from "next";

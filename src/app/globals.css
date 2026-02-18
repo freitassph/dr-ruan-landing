@@ -4,8 +4,9 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --background: 13 61 61;
+    /* #0D3D3D */
+    --foreground: 0 0 100%;
     --card: 0 0% 100%;
     --card-foreground: 222.2 84% 4.9%;
     --popover: 0 0% 100%;
@@ -83,6 +84,8 @@ html.lenis {
 
   body {
     @apply bg-primary text-white font-sans antialiased overflow-x-hidden;
+    background-color: #0D3D3D;
+    /* Critical Paint Optimization */
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;

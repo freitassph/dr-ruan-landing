@@ -4,6 +4,17 @@ const nextConfig = {
     images: {
         formats: ['image/avif', 'image/webp'],
         remotePatterns: [],
+        // Mobile-first device sizes — evita imagens oversized em mobile
+        deviceSizes: [390, 430, 768, 1024, 1280, 1920],
+        imageSizes: [16, 32, 64, 128, 256],
+        // Cache imagens por 1 ano no CDN
+        minimumCacheTTL: 31536000,
+    },
+    // Compressão gzip/brotli
+    compress: true,
+    // Reduzir JS legado — alvo apenas navegadores modernos
+    experimental: {
+        optimizePackageImports: ['lucide-react', 'framer-motion'],
     },
     async headers() {
         return [
