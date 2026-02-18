@@ -79,7 +79,7 @@ html.lenis {
   }
 
   html {
-    @apply scroll-smooth;
+    @apply overflow-x-hidden overflow-y-auto;
   }
 
   body {

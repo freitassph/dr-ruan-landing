@@ -16,7 +16,6 @@ const iconMap: Record<string, React.ElementType> = {
 };
 
 export function ServicesSection() {
-    const shouldReduceMotion = useReducedMotion();
 
     return (
         <Section id="especialidades" dark className="bg-primary-dark py-24 sm:py-32 lg:py-40">
@@ -42,7 +41,7 @@ export function ServicesSection() {
                                 duration: 0.5,
                                 ease: "easeOut"
                             }}
-                            className="group relative overflow-hidden rounded-3xl p-8 sm:p-10 border border-white/5 bg-white/5 active:bg-white/10 lg:hover:bg-white/[0.07] transition-[background-color,border-color,transform] duration-300 ease-out cursor-default"
+                            className="group relative overflow-hidden rounded-3xl p-8 sm:p-10 border border-white/5 bg-white/5 lg:hover:bg-white/[0.07] transition-[background-color,border-color] duration-300 ease-out"
                         >
                             {/* Blur Effect - Completely disabled below Desktop to avoid flickers */}
                             <div className="hidden xl:block absolute top-0 right-0 w-64 h-64 bg-gold-400/5 rounded-full blur-[100px] group-hover:bg-gold-400/10 transition-colors duration-1000 pointer-events-none -translate-y-1/2 translate-x-1/2" />
@@ -54,18 +53,18 @@ export function ServicesSection() {
 
                             <div className="h-full flex flex-col justify-between relative z-10 gap-6 sm:gap-0">
                                 <div className="flex justify-between items-start">
-                                    <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-gold group-hover:bg-gold group-hover:text-primary transition-[background-color,color,transform] duration-500">
+                                    <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-gold lg:group-hover:bg-gold lg:group-hover:text-primary transition-[background-color,color] duration-500">
                                         <Icon size={28} className="sm:w-8 sm:h-8" strokeWidth={1} />
                                     </div>
                                     {/* Arrow icon only visual on desktop hover */}
-                                    <ArrowUpRight className="text-white/20 group-hover:text-gold transition-colors duration-500 hidden xl:block" />
+                                    <ArrowUpRight className="text-white/20 lg:group-hover:text-gold transition-colors duration-500 hidden xl:block" />
                                 </div>
 
                                 <div>
-                                    <h3 className="font-serif font-medium text-white mb-3 sm:mb-4 group-hover:text-gold transition-colors duration-500 text-xl sm:text-2xl">
+                                    <h3 className="font-serif font-medium text-white mb-3 sm:mb-4 lg:group-hover:text-gold transition-colors duration-500 text-xl sm:text-2xl">
                                         {service.title}
                                     </h3>
-                                    <p className="text-white/60 font-light leading-relaxed text-sm sm:text-base group-hover:text-white/80 transition-colors duration-500">
+                                    <p className="text-white/60 font-light leading-relaxed text-sm sm:text-base lg:group-hover:text-white/80 transition-colors duration-500">
                                         {service.description}
                                     </p>
                                 </div>
