@@ -4,6 +4,7 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 import { SmoothScroll } from "@/components/layout/smooth-scroll";
 import { CookieBanner } from "@/components/layout/cookie-banner";
+import { MenuProvider } from "@/components/layout/menu-context";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const playfair = Playfair_Display({
@@ -81,9 +82,11 @@ export default function RootLayout({
                         __html: `history.scrollRestoration = "manual"`,
                     }}
                 />
-                <SmoothScroll>
-                    {children}
-                </SmoothScroll>
+                <MenuProvider>
+                    <SmoothScroll>
+                        {children}
+                    </SmoothScroll>
+                </MenuProvider>
                 <CookieBanner />
             </body>
         </html>
