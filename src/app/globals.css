@@ -79,11 +79,13 @@ html.lenis {
   }
 
   html {
-    @apply overflow-x-hidden overflow-y-auto;
+    @apply scroll-smooth;
+    overflow-x: hidden !important;
   }
 
   body {
-    @apply bg-primary text-white font-sans antialiased overflow-x-hidden;
+    @apply bg-primary text-white font-sans antialiased;
+    overflow-x: hidden !important;
     background-color: #0D3D3D;
     /* Critical Paint Optimization */
     text-rendering: optimizeLegibility;

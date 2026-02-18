@@ -54,9 +54,10 @@ export function AboutSection() {
                             </div>
                         </div>
 
-                        {/* Decorative Elements */}
-                        <div className="absolute -bottom-10 -right-10 w-40 h-40 border border-gold/30 rounded-full z-0" />
-                        <div className="absolute -top-10 -left-10 w-20 h-20 border border-primary/10 rounded-full z-0" />
+
+                        {/* Decorative Elements - Hidden on mobile to prevent overflow/wobble */}
+                        <div className="hidden sm:block absolute -bottom-10 -right-10 w-40 h-40 border border-gold/30 rounded-full z-0" />
+                        <div className="hidden sm:block absolute -top-10 -left-10 w-20 h-20 border border-primary/10 rounded-full z-0" />
                     </motion.div>
                 </div>
 
