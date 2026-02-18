@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { DOCTOR, HERO_CONTENT } from "@/lib/constants";
 import { motion, useScroll, useTransform } from "framer-motion";
@@ -9,19 +9,11 @@ import { ArrowRight, MessageCircle, GraduationCap, Globe } from "lucide-react";
 export function HeroSection() {
     const containerRef = useRef<HTMLDivElement>(null);
     const { scrollY } = useScroll();
-    const [isMobile, setIsMobile] = useState(false);
 
-    useEffect(() => {
-        const check = () => setIsMobile(window.innerWidth < 1024);
-        check();
-        window.addEventListener("resize", check);
-        return () => window.removeEventListener("resize", check);
-    }, []);
-
-    // Parallax transforms — ONLY for desktop
-    const y1 = useTransform(scrollY, [0, 500], [0, isMobile ? 0 : 200]);
-    const y2 = useTransform(scrollY, [0, 500], [0, isMobile ? 0 : -150]);
-    const opacity = useTransform(scrollY, [0, 300], [1, isMobile ? 1 : 0]);
+    // Parallax suave — valores pequenos são inofensivos no mobile
+    // Não usamos useState(isMobile) para evitar hydration mismatch
+    const y1 = useTransform(scrollY, [0, 500], [0, 80]);
+    const opacity = useTransform(scrollY, [0, 300], [1, 0]);
 
     return (
         <section
@@ -59,7 +51,7 @@ export function HeroSection() {
 
                 {/* Left: Typography — NO parallax on mobile */}
                 <motion.div
-                    style={isMobile ? {} : { y: y1 }}
+                    style={{ y: y1 }}
                     className="lg:col-span-8 flex flex-col justify-center"
                 >
                     {/* Badge */}
@@ -167,7 +159,6 @@ export function HeroSection() {
 
                 {/* Right: Floating Glass Cards — Desktop only */}
                 <motion.div
-                    style={isMobile ? {} : { y: y2 }}
                     className="lg:col-span-4 relative h-[600px] hidden lg:block"
                 >
                     <motion.div
