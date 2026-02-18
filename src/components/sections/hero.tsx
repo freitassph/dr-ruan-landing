@@ -10,9 +10,9 @@ export function HeroSection() {
     const containerRef = useRef<HTMLDivElement>(null);
     const { scrollY } = useScroll();
 
-    // Parallax suave — sem useState(isMobile) para evitar hydration mismatch
+    // Parallax suave - Mantém leve movimento no Desktop
+    // No mobile, o impacto é mínimo pois usamos transform na GPU
     const y1 = useTransform(scrollY, [0, 500], [0, 80]);
-    const opacity = useTransform(scrollY, [0, 300], [1, 0]);
 
     return (
         <section
@@ -24,7 +24,7 @@ export function HeroSection() {
             <div className="absolute inset-0 z-0">
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,_#0D3D3D_0%,_#051818_100%)]" />
 
-                {/* Animated Orbs — CSS animation, sem JS */}
+                {/* Animated Orbs — CSS animation pura */}
                 <div className="absolute top-[-10%] right-[-10%] w-[400px] lg:w-[800px] h-[400px] lg:h-[800px] rounded-full bg-gold/5 blur-[60px] lg:blur-[80px] animate-pulse-slow" />
                 <div className="absolute bottom-[-10%] left-[-10%] w-[300px] lg:w-[600px] h-[300px] lg:h-[600px] rounded-full bg-primary-light/10 blur-[40px] lg:blur-[60px] animate-pulse-slower" />
 
@@ -40,55 +40,34 @@ export function HeroSection() {
             {/* Content */}
             <div className="relative z-10 w-full max-w-7xl mx-auto pt-32 sm:pt-36 pb-32 px-6 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
 
-                {/* Left: Typography */}
+                {/* Left: Typography - Mobile First Native CSS Animations */}
                 <motion.div
                     style={{ y: y1 }}
                     className="lg:col-span-8 flex flex-col justify-center"
                 >
-                    {/* Badge — visível imediatamente, anima como enhancement */}
-                    <motion.div
-                        initial={{ opacity: 0, x: -20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.6, ease: "easeOut", delay: 0 }}
-                        className="flex items-center gap-3 mb-8"
-                    >
+                    {/* Badge */}
+                    <div className="flex items-center gap-3 mb-8 opacity-0 animate-[fade-in-up_0.8s_ease-out_forwards]">
                         <div className="h-[1px] w-12 bg-gold-400" />
                         <span className="text-gold-400 font-sans text-sm tracking-[0.2em] uppercase">
                             Neurocirurgia Avançada
                         </span>
-                    </motion.div>
+                    </div>
 
-                    {/* Headline — sem clip/overflow que esconde no SSR */}
-                    <motion.h1
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.7, ease: "easeOut", delay: 0.1 }}
-                        className="font-serif font-medium leading-[1.1] text-white tracking-tight
-                                   text-4xl xs:text-5xl sm:text-[3.75rem] md:text-[4.5rem] lg:text-[5.5rem] xl:text-[6rem]"
-                    >
+                    {/* Headline */}
+                    <h1 className="opacity-0 animate-[fade-in-up_0.8s_ease-out_0.1s_forwards] font-serif font-medium leading-[1.1] text-white tracking-tight text-4xl xs:text-5xl sm:text-[3.75rem] md:text-[4.5rem] lg:text-[5.5rem] xl:text-[6rem]">
                         {HERO_CONTENT.headline} <br />
                         <span className="text-gold italic font-normal pb-6 pr-4 inline-block -mb-6 tracking-tight drop-shadow-sm">
                             {HERO_CONTENT.headlineHighlight}
                         </span>
-                    </motion.h1>
+                    </h1>
 
                     {/* Sub */}
-                    <motion.p
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ duration: 0.6, delay: 0.3 }}
-                        className="mt-8 sm:mt-10 text-base sm:text-lg md:text-xl text-white/70 max-w-xl md:max-w-2xl font-light leading-relaxed border-l-2 border-gold/30 pl-4 sm:pl-6"
-                    >
+                    <p className="opacity-0 animate-[fade-in-up_0.8s_ease-out_0.2s_forwards] mt-8 sm:mt-10 text-base sm:text-lg md:text-xl text-white/70 max-w-xl md:max-w-2xl font-light leading-relaxed border-l-2 border-gold/30 pl-4 sm:pl-6">
                         Especialista pela <strong className="text-white font-medium">USP-RP</strong> e com fellowship na <strong className="text-white font-medium">Itália</strong>, Dr. Ruan combina a técnica mais avançada da neurocirurgia com um olhar atento e humano para cada paciente.
-                    </motion.p>
+                    </p>
 
                     {/* CTAs */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 16 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.5, delay: 0.45 }}
-                        className="mt-10 sm:mt-12 flex flex-col sm:flex-row gap-4 sm:gap-5 w-full sm:w-auto"
-                    >
+                    <div className="opacity-0 animate-[fade-in-up_0.8s_ease-out_0.3s_forwards] mt-10 sm:mt-12 flex flex-col sm:flex-row gap-4 sm:gap-5 w-full sm:w-auto">
                         <Button
                             variant="primary"
                             size="lg"
@@ -108,15 +87,10 @@ export function HeroSection() {
                                 <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 transition-transform group-hover:translate-x-1" />
                             </div>
                         </a>
-                    </motion.div>
+                    </div>
 
-                    {/* Mobile Authority Badges */}
-                    <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 0.6, duration: 0.5 }}
-                        className="mt-12 flex flex-col sm:flex-row gap-6 lg:hidden border-t border-white/10 pt-8 w-full"
-                    >
+                    {/* Mobile Authority Badges - Static HTML */}
+                    <div className="opacity-0 animate-[fade-in-up_0.8s_ease-out_0.4s_forwards] mt-12 flex flex-col sm:flex-row gap-6 lg:hidden border-t border-white/10 pt-8 w-full">
                         <div className="flex items-center gap-4">
                             <div className="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gold shrink-0 shadow-lg">
                                 <GraduationCap size={24} strokeWidth={1.5} />
@@ -138,7 +112,7 @@ export function HeroSection() {
                                 <p className="text-white/40 text-xs font-light tracking-wide uppercase">Nápoles, Itália</p>
                             </div>
                         </div>
-                    </motion.div>
+                    </div>
                 </motion.div>
 
                 {/* Right: Floating Glass Cards — Desktop only */}
@@ -179,7 +153,9 @@ export function HeroSection() {
 
             {/* Scroll Indicator — Desktop only */}
             <motion.div
-                style={{ opacity }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 1, duration: 1 }}
                 className="absolute bottom-10 left-1/2 -translate-x-1/2 flex-col items-center gap-2 hidden lg:flex"
             >
                 <span className="text-[10px] uppercase tracking-[0.3em] text-white/30">Scroll</span>

@@ -73,11 +73,16 @@ const config: Config = {
                     '0%, 100%': { opacity: '0.1', transform: 'scale(1.1)' },
                     '50%': { opacity: '0.2', transform: 'scale(1)' },
                 },
+                'fade-in-up': {
+                    '0%': { opacity: '0', transform: 'translateY(20px)' },
+                    '100%': { opacity: '1', transform: 'translateY(0)' },
+                },
             },
             animation: {
                 shimmer: 'shimmer 8s linear infinite',
                 'pulse-slow': 'pulse-slow 15s ease-in-out infinite',
                 'pulse-slower': 'pulse-slower 20s ease-in-out infinite',
+                'fade-in-up': 'fade-in-up 0.8s ease-out forwards',
             }
         },
     },

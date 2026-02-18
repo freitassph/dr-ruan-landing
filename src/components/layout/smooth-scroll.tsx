@@ -1,44 +1,48 @@
 "use client";
 
-import React, { useLayoutEffect, useEffect, useRef } from 'react'
+import React, { useLayoutEffect, useEffect, useRef, useState } from 'react'
 import { ReactLenis, LenisRef } from 'lenis/react'
 import { usePathname } from 'next/navigation'
 
 export function SmoothScroll({ children }: { children: React.ReactNode }) {
     const pathname = usePathname()
+    const [isMobile, setIsMobile] = useState(true); // Assume mobile first para segurança (sem FOUC de scroll)
     const lenisRef = useRef<LenisRef>(null)
 
     useLayoutEffect(() => {
         window.scrollTo(0, 0);
     }, [pathname]);
 
-    // Desabilitar Lenis em mobile/tablet via stop() — sem re-mount da árvore
     useEffect(() => {
-        const lenis = lenisRef.current?.lenis;
-        if (!lenis) return;
-
-        const isMobile = window.innerWidth < 1024;
-        if (isMobile) {
-            lenis.stop(); // Para o smooth scroll sem desmontar
-        } else {
-            lenis.start();
-        }
-
-        const handleResize = () => {
-            const mobile = window.innerWidth < 1024;
-            if (mobile) lenis.stop();
-            else lenis.start();
+        // Detecção robusta de mobile
+        const checkMobile = () => {
+            const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+            const isSmallScreen = window.innerWidth < 1024;
+            setIsMobile(isTouch || isSmallScreen);
         };
 
-        window.addEventListener('resize', handleResize);
-        return () => window.removeEventListener('resize', handleResize);
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+        return () => window.removeEventListener('resize', checkMobile);
     }, []);
 
+    // SE FOR MOBILE: Retorna children puros. 
+    // Zero JS de scroll, zero listeners, zero travamento.
+    if (isMobile) {
+        return <>{children}</>;
+    }
+
+    // Apenas Desktop ganha o Luxo do Smooth Scroll
     return (
         <ReactLenis
             ref={lenisRef}
             root
-            options={{ lerp: 0.1, duration: 1.2, smoothWheel: true }}
+            options={{
+                lerp: 0.1,
+                duration: 1.2,
+                smoothWheel: true,
+                touchMultiplier: 2,
+            }}
         >
             {children}
         </ReactLenis>
