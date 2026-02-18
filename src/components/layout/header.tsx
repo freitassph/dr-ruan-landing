@@ -28,28 +28,35 @@ export function Header() {
 
     return (
         <header
-            className={cn(
-                // FIXED em TODAS as telas (mobile, tablet, desktop)
-                "fixed top-0 left-0 right-0 z-[999] transition-all duration-300 border-b flex items-end",
-                isScrolled
-                    ? "bg-primary/95 backdrop-blur-md border-white/5 shadow-lg"
-                    : "bg-transparent border-transparent"
-            )}
+            className="fixed top-0 left-0 right-0 z-[999] flex flex-col justify-end"
             style={{
-                paddingTop: "env(safe-area-inset-top)",
-                paddingLeft: "env(safe-area-inset-left)",
-                paddingRight: "env(safe-area-inset-right)",
-                minHeight: "calc(5rem + env(safe-area-inset-top))",
+                // Altura total = altura do conteúdo (5rem/80px) + espaço do notch
+                height: "calc(5rem + env(safe-area-inset-top))",
             }}
         >
-            <div className="w-full mx-auto max-w-7xl px-6 md:px-12 flex items-center justify-between gap-4 h-20">
+            {/* 
+              CAMADA DE FUNDO (Background Layer) 
+              Fica absolute inset-0 para cobrir TUDO, inclusive atrás do notch.
+            */}
+            <div
+                className={cn(
+                    "absolute inset-0 z-0 transition-all duration-500 ease-in-out",
+                    isScrolled
+                        ? "opacity-100 bg-gradient-to-b from-primary-dark/90 via-primary/95 to-primary/95 backdrop-blur-md shadow-lg border-b border-white/5"
+                        : "opacity-0 bg-transparent"
+                )}
+            />
+
+            {/* CONTEÚDO (Logo, Nav, Menu) */}
+            <div className="relative z-10 w-full mx-auto max-w-7xl px-6 md:px-12 flex items-center justify-between gap-4 h-20 shrink-0">
+
                 {/* Logo — VISÍVEL em todas as telas */}
                 <Link href="/#inicio" className="flex items-center gap-3 group relative z-50 shrink-0" aria-label="Ir ao início">
                     <div className="flex flex-col justify-center">
-                        <p className="text-sm md:text-base font-serif font-bold text-white tracking-wide leading-none whitespace-nowrap">
+                        <p className="text-sm md:text-base font-serif font-bold text-white tracking-wide leading-none whitespace-nowrap drop-shadow-sm">
                             Dr. Ruan Krubniki
                         </p>
-                        <p className="text-[9px] sm:text-[10px] uppercase tracking-[0.2em] sm:tracking-[0.25em] text-gold/80 font-medium leading-none mt-0.5">
+                        <p className="text-[9px] sm:text-[10px] uppercase tracking-[0.2em] sm:tracking-[0.25em] text-gold/90 font-medium leading-none mt-0.5">
                             Neurocirurgia
                         </p>
                     </div>
@@ -61,7 +68,7 @@ export function Header() {
                         <Link
                             key={link.href}
                             href={link.href}
-                            className="text-sm font-medium text-white/70 hover:text-white hover:tracking-widest transition-all duration-300 relative group py-2"
+                            className="text-sm font-medium text-white/80 hover:text-white hover:tracking-widest transition-all duration-300 relative group py-2"
                         >
                             {link.label}
                             <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-gold group-hover:w-full transition-all duration-300" />
@@ -78,9 +85,9 @@ export function Header() {
                     onClick={() => setIsMobileMenuOpen(true)}
                     aria-label="Abrir menu"
                 >
-                    <span className="w-7 h-[2px] bg-white block origin-center transition-all duration-300 group-hover:w-8" />
-                    <span className="w-5 h-[2px] bg-white/70 block ml-auto transition-all duration-300 group-hover:w-7" />
-                    <span className="w-7 h-[2px] bg-white block origin-center transition-all duration-300 group-hover:w-8" />
+                    <span className="w-7 h-[2px] bg-white block origin-center transition-all duration-300 group-hover:w-8 shadow-sm" />
+                    <span className="w-5 h-[2px] bg-white/80 block ml-auto transition-all duration-300 group-hover:w-7 shadow-sm" />
+                    <span className="w-7 h-[2px] bg-white block origin-center transition-all duration-300 group-hover:w-8 shadow-sm" />
                 </button>
             </div>
 
