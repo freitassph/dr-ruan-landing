@@ -56,10 +56,20 @@ const config: Config = {
                 shimmer: {
                     '0%': { backgroundPosition: '200% 0' },
                     '100%': { backgroundPosition: '-200% 0' },
-                }
+                },
+                'pulse-slow': {
+                    '0%, 100%': { opacity: '0.2', transform: 'scale(1)' },
+                    '50%': { opacity: '0.3', transform: 'scale(1.1)' },
+                },
+                'pulse-slower': {
+                    '0%, 100%': { opacity: '0.1', transform: 'scale(1.1)' },
+                    '50%': { opacity: '0.2', transform: 'scale(1)' },
+                },
             },
             animation: {
                 shimmer: 'shimmer 8s linear infinite',
+                'pulse-slow': 'pulse-slow 15s ease-in-out infinite',
+                'pulse-slower': 'pulse-slower 20s ease-in-out infinite',
             }
         },
     },

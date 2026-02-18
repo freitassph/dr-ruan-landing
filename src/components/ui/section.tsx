@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 
@@ -11,38 +11,23 @@ interface SectionProps {
     dark?: boolean;
 }
 
+// Animação suave para desktop — sem y transform para evitar reflow
 const sectionVariants = {
-    hidden: { opacity: 0, y: 16 },
+    hidden: { opacity: 0 },
     visible: {
         opacity: 1,
-        y: 0,
-        transition: { duration: 0.55, ease: "easeOut" },
+        transition: { duration: 0.5, ease: "easeOut" },
     },
 };
 
-// No animation variant for mobile — avoids reflows and "jump" effect
-const noAnimVariants = {
-    hidden: { opacity: 1, y: 0 },
-    visible: { opacity: 1, y: 0 },
-};
-
 export function Section({ id, className, children, dark = false }: SectionProps) {
-    const [isMobile, setIsMobile] = useState(false);
-
-    useEffect(() => {
-        const check = () => setIsMobile(window.innerWidth < 1024);
-        check();
-        window.addEventListener("resize", check);
-        return () => window.removeEventListener("resize", check);
-    }, []);
-
     return (
         <motion.section
             id={id}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-40px" }}
-            variants={isMobile ? noAnimVariants : sectionVariants}
+            variants={sectionVariants}
             className={cn(
                 "relative py-20 px-6 md:px-12 overflow-hidden",
                 dark ? "bg-primary text-white" : "bg-surface-cream text-primary",

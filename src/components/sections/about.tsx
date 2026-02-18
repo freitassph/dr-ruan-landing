@@ -36,12 +36,12 @@ export function AboutSection() {
 
                             {/* Doctor's Photo - Optimized */}
                             <NextImage
-                                src="/dr-ruan.avif"
+                                src="/dr-ruan.jpg"
                                 alt="Dr. Ruan Krubniki Ferraz - Neurocirurgião"
                                 fill
                                 className="object-cover object-center"
                                 sizes="(max-width: 768px) 90vw, (max-width: 1200px) 45vw, 33vw"
-                                quality={85}
+                                quality={80}
                                 loading="lazy"
                             />
 

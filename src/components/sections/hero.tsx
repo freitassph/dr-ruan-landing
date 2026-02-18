@@ -10,8 +10,7 @@ export function HeroSection() {
     const containerRef = useRef<HTMLDivElement>(null);
     const { scrollY } = useScroll();
 
-    // Parallax suave — valores pequenos são inofensivos no mobile
-    // Não usamos useState(isMobile) para evitar hydration mismatch
+    // Parallax suave — sem useState(isMobile) para evitar hydration mismatch
     const y1 = useTransform(scrollY, [0, 500], [0, 80]);
     const opacity = useTransform(scrollY, [0, 300], [1, 0]);
 
@@ -25,17 +24,9 @@ export function HeroSection() {
             <div className="absolute inset-0 z-0">
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,_#0D3D3D_0%,_#051818_100%)]" />
 
-                {/* Animated Orbs — Reduced on mobile */}
-                <motion.div
-                    animate={{ scale: [1, 1.1, 1], opacity: [0.2, 0.3, 0.2] }}
-                    transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-                    className="absolute top-[-10%] right-[-10%] w-[400px] lg:w-[800px] h-[400px] lg:h-[800px] rounded-full bg-gold/5 blur-[60px] lg:blur-[80px] will-change-transform"
-                />
-                <motion.div
-                    animate={{ scale: [1.1, 1, 1.1], opacity: [0.1, 0.2, 0.1] }}
-                    transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                    className="absolute bottom-[-10%] left-[-10%] w-[300px] lg:w-[600px] h-[300px] lg:h-[600px] rounded-full bg-primary-light/10 blur-[40px] lg:blur-[60px] will-change-transform"
-                />
+                {/* Animated Orbs — CSS animation, sem JS */}
+                <div className="absolute top-[-10%] right-[-10%] w-[400px] lg:w-[800px] h-[400px] lg:h-[800px] rounded-full bg-gold/5 blur-[60px] lg:blur-[80px] animate-pulse-slow" />
+                <div className="absolute bottom-[-10%] left-[-10%] w-[300px] lg:w-[600px] h-[300px] lg:h-[600px] rounded-full bg-primary-light/10 blur-[40px] lg:blur-[60px] animate-pulse-slower" />
 
                 {/* Subtle Dot Grid */}
                 <svg className="absolute inset-0 w-full h-full opacity-[0.08] pointer-events-none">
@@ -49,16 +40,16 @@ export function HeroSection() {
             {/* Content */}
             <div className="relative z-10 w-full max-w-7xl mx-auto pt-32 sm:pt-36 pb-32 px-6 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
 
-                {/* Left: Typography — NO parallax on mobile */}
+                {/* Left: Typography */}
                 <motion.div
                     style={{ y: y1 }}
                     className="lg:col-span-8 flex flex-col justify-center"
                 >
-                    {/* Badge */}
+                    {/* Badge — visível imediatamente, anima como enhancement */}
                     <motion.div
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+                        transition={{ duration: 0.6, ease: "easeOut", delay: 0 }}
                         className="flex items-center gap-3 mb-8"
                     >
                         <div className="h-[1px] w-12 bg-gold-400" />
@@ -67,27 +58,25 @@ export function HeroSection() {
                         </span>
                     </motion.div>
 
-                    {/* Headline - Fluid Typography */}
-                    <div className="overflow-hidden py-8 -my-8 pr-4 pl-1">
-                        <motion.h1
-                            initial={{ y: "100%" }}
-                            animate={{ y: 0 }}
-                            transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
-                            className="font-serif font-medium leading-[1.1] text-white tracking-tight
-                                       text-4xl xs:text-5xl sm:text-[3.75rem] md:text-[4.5rem] lg:text-[5.5rem] xl:text-[6rem]"
-                        >
-                            {HERO_CONTENT.headline} <br />
-                            <span className="text-gold italic font-normal pb-6 pr-4 inline-block -mb-6 tracking-tight drop-shadow-sm">
-                                {HERO_CONTENT.headlineHighlight}
-                            </span>
-                        </motion.h1>
-                    </div>
+                    {/* Headline — sem clip/overflow que esconde no SSR */}
+                    <motion.h1
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.7, ease: "easeOut", delay: 0.1 }}
+                        className="font-serif font-medium leading-[1.1] text-white tracking-tight
+                                   text-4xl xs:text-5xl sm:text-[3.75rem] md:text-[4.5rem] lg:text-[5.5rem] xl:text-[6rem]"
+                    >
+                        {HERO_CONTENT.headline} <br />
+                        <span className="text-gold italic font-normal pb-6 pr-4 inline-block -mb-6 tracking-tight drop-shadow-sm">
+                            {HERO_CONTENT.headlineHighlight}
+                        </span>
+                    </motion.h1>
 
                     {/* Sub */}
                     <motion.p
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
-                        transition={{ duration: 1, delay: 0.8 }}
+                        transition={{ duration: 0.6, delay: 0.3 }}
                         className="mt-8 sm:mt-10 text-base sm:text-lg md:text-xl text-white/70 max-w-xl md:max-w-2xl font-light leading-relaxed border-l-2 border-gold/30 pl-4 sm:pl-6"
                     >
                         Especialista pela <strong className="text-white font-medium">USP-RP</strong> e com fellowship na <strong className="text-white font-medium">Itália</strong>, Dr. Ruan combina a técnica mais avançada da neurocirurgia com um olhar atento e humano para cada paciente.
@@ -95,9 +84,9 @@ export function HeroSection() {
 
                     {/* CTAs */}
                     <motion.div
-                        initial={{ opacity: 0, y: 20 }}
+                        initial={{ opacity: 0, y: 16 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8, delay: 1 }}
+                        transition={{ duration: 0.5, delay: 0.45 }}
                         className="mt-10 sm:mt-12 flex flex-col sm:flex-row gap-4 sm:gap-5 w-full sm:w-auto"
                     >
                         <Button
@@ -122,13 +111,13 @@ export function HeroSection() {
                     </motion.div>
 
                     {/* Mobile Authority Badges */}
-                    <div className="mt-12 flex flex-col sm:flex-row gap-6 lg:hidden border-t border-white/10 pt-8 w-full">
-                        <motion.div
-                            initial={{ opacity: 0, x: -20 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            transition={{ delay: 1.2, duration: 0.8 }}
-                            className="flex items-center gap-4"
-                        >
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: 0.6, duration: 0.5 }}
+                        className="mt-12 flex flex-col sm:flex-row gap-6 lg:hidden border-t border-white/10 pt-8 w-full"
+                    >
+                        <div className="flex items-center gap-4">
                             <div className="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gold shrink-0 shadow-lg">
                                 <GraduationCap size={24} strokeWidth={1.5} />
                             </div>
@@ -136,16 +125,11 @@ export function HeroSection() {
                                 <p className="text-white font-serif text-lg leading-none mb-1">USP-RP</p>
                                 <p className="text-white/40 text-xs font-light tracking-wide uppercase">Neurocirurgia</p>
                             </div>
-                        </motion.div>
+                        </div>
 
                         <div className="hidden sm:block w-[1px] h-12 bg-white/10" />
 
-                        <motion.div
-                            initial={{ opacity: 0, x: -20 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            transition={{ delay: 1.4, duration: 0.8 }}
-                            className="flex items-center gap-4"
-                        >
+                        <div className="flex items-center gap-4">
                             <div className="w-12 h-12 rounded-full bg-gold/10 border border-gold/20 flex items-center justify-center text-gold shrink-0 shadow-lg shadow-gold/5">
                                 <Globe size={24} strokeWidth={1.5} />
                             </div>
@@ -153,8 +137,8 @@ export function HeroSection() {
                                 <p className="text-gold font-serif text-lg leading-none mb-1">Fellowship</p>
                                 <p className="text-white/40 text-xs font-light tracking-wide uppercase">Nápoles, Itália</p>
                             </div>
-                        </motion.div>
-                    </div>
+                        </div>
+                    </motion.div>
                 </motion.div>
 
                 {/* Right: Floating Glass Cards — Desktop only */}
