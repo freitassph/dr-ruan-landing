@@ -19,8 +19,8 @@ export const DOCTOR = {
 
 export const HERO_CONTENT = {
     badge: "Neurocirurgia de Alta Complexidade",
-    headline: "Precisão Técnica e",
-    headlineHighlight: "Cuidado Humano",
+    headline: "Precisão Técnica",
+    headlineHighlight: "e Cuidado Humano",
     subheadline: "Neurocirurgião com formação USP-RP e Fellowship na Itália. Tratamento especializado para doenças da Coluna, Tumores Cerebrais e Parkinson com técnicas minimamente invasivas.",
     ctaPrimary: "Agendar Consulta",
     ctaSecondary: "Conheça o Dr. Ruan",

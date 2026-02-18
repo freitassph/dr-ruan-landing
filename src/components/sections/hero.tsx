@@ -53,7 +53,7 @@ export function HeroSection() {
                     </div>
 
                     {/* Headline */}
-                    <h1 className="opacity-0 animate-[fade-in-up_0.8s_ease-out_0.1s_forwards] font-serif font-medium leading-[1.05] text-white tracking-tight text-5xl xs:text-[3.5rem] sm:text-[4rem] md:text-[4.5rem] lg:text-[5.5rem] xl:text-[6rem]">
+                    <h1 className="opacity-0 animate-[fade-in-up_0.8s_ease-out_0.1s_forwards] font-serif font-medium leading-[1.05] text-white tracking-tight text-[2.75rem] xs:text-5xl sm:text-[3.75rem] md:text-[4.5rem] lg:text-[5.5rem] xl:text-[6rem]">
                         {HERO_CONTENT.headline} <br />
                         <span className="text-gold italic font-normal pb-6 pr-4 inline-block -mb-6 tracking-tight drop-shadow-sm">
                             {HERO_CONTENT.headlineHighlight}
