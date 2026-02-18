@@ -38,15 +38,14 @@ export function HeroSection() {
             </div>
 
             {/* Content */}
-            <div className="relative z-10 w-full max-w-7xl mx-auto pt-32 sm:pt-36 pb-32 px-6 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            <div className="relative z-10 w-full max-w-7xl mx-auto pt-32 sm:pt-36 lg:pt-28 pb-32 px-6 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
 
                 {/* Left: Typography - Mobile First Native CSS Animations */}
                 <motion.div
-                    style={{ y: y1 }}
                     className="lg:col-span-8 flex flex-col justify-center"
                 >
                     {/* Badge */}
-                    <div className="flex items-center gap-3 mb-8 opacity-0 animate-[fade-in-up_0.8s_ease-out_forwards]">
+                    <div className="flex items-center gap-3 mb-6 opacity-0 animate-[fade-in-up_0.8s_ease-out_forwards]">
                         <div className="h-[1px] w-12 bg-gold-400" />
                         <span className="text-gold-400 font-sans text-sm tracking-[0.2em] uppercase">
                             Neurocirurgia Avançada
@@ -54,7 +53,7 @@ export function HeroSection() {
                     </div>
 
                     {/* Headline */}
-                    <h1 className="opacity-0 animate-[fade-in-up_0.8s_ease-out_0.1s_forwards] font-serif font-medium leading-[1.1] text-white tracking-tight text-4xl xs:text-5xl sm:text-[3.75rem] md:text-[4.5rem] lg:text-[5.5rem] xl:text-[6rem]">
+                    <h1 className="opacity-0 animate-[fade-in-up_0.8s_ease-out_0.1s_forwards] font-serif font-medium leading-[1.05] text-white tracking-tight text-5xl xs:text-[3.5rem] sm:text-[4rem] md:text-[4.5rem] lg:text-[5.5rem] xl:text-[6rem]">
                         {HERO_CONTENT.headline} <br />
                         <span className="text-gold italic font-normal pb-6 pr-4 inline-block -mb-6 tracking-tight drop-shadow-sm">
                             {HERO_CONTENT.headlineHighlight}
@@ -62,12 +61,12 @@ export function HeroSection() {
                     </h1>
 
                     {/* Sub */}
-                    <p className="opacity-0 animate-[fade-in-up_0.8s_ease-out_0.2s_forwards] mt-8 sm:mt-10 text-base sm:text-lg md:text-xl text-white/70 max-w-xl md:max-w-2xl font-light leading-relaxed border-l-2 border-gold/30 pl-4 sm:pl-6">
+                    <p className="opacity-0 animate-[fade-in-up_0.8s_ease-out_0.2s_forwards] mt-6 sm:mt-8 text-base sm:text-lg md:text-xl text-white/70 max-w-xl md:max-w-2xl font-light leading-relaxed border-l-2 border-gold/30 pl-4 sm:pl-6">
                         Especialista pela <strong className="text-white font-medium">USP-RP</strong> e com fellowship na <strong className="text-white font-medium">Itália</strong>, Dr. Ruan combina a técnica mais avançada da neurocirurgia com um olhar atento e humano para cada paciente.
                     </p>
 
                     {/* CTAs */}
-                    <div className="opacity-0 animate-[fade-in-up_0.8s_ease-out_0.3s_forwards] mt-10 sm:mt-12 flex flex-col sm:flex-row gap-4 sm:gap-5 w-full sm:w-auto">
+                    <div className="opacity-0 animate-[fade-in-up_0.8s_ease-out_0.3s_forwards] mt-8 sm:mt-10 flex flex-col sm:flex-row gap-4 sm:gap-5 w-full sm:w-auto">
                         <Button
                             variant="primary"
                             size="lg"
@@ -156,7 +155,7 @@ export function HeroSection() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 1, duration: 1 }}
-                className="absolute bottom-10 left-1/2 -translate-x-1/2 flex-col items-center gap-2 hidden lg:flex"
+                className="absolute bottom-14 left-1/2 -translate-x-1/2 flex-col items-center gap-2 hidden lg:flex"
             >
                 <span className="text-[10px] uppercase tracking-[0.3em] text-white/30">Scroll</span>
                 <div className="w-[1px] h-12 bg-gradient-to-b from-gold to-transparent" />

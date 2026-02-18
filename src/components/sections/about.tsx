@@ -41,7 +41,7 @@ export function AboutSection() {
                                 fill
                                 className="object-cover object-center"
                                 sizes="(max-width: 768px) 90vw, (max-width: 1200px) 45vw, 33vw"
-                                quality={80}
+                                quality={90}
                                 loading="lazy"
                             />
 
