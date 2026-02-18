@@ -37,13 +37,13 @@ export function HeroSection() {
                 </svg>
             </div>
 
-            {/* Content */}
-            <div className="relative z-10 w-full max-w-7xl mx-auto pt-32 sm:pt-36 pb-32 px-6 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            {/* Content - Adjusted Grid and Padding for Exact Match */}
+            <div className="relative z-10 w-full max-w-[1400px] mx-auto pt-32 sm:pt-40 pb-32 px-6 md:px-16 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-0 items-center h-full">
 
                 {/* Left: Typography - Mobile First Native CSS Animations */}
                 <motion.div
                     style={{ y: y1 }}
-                    className="lg:col-span-8 flex flex-col justify-center"
+                    className="lg:col-span-7 flex flex-col justify-center relative z-20"
                 >
                     {/* Badge */}
                     <div className="flex items-center gap-3 mb-8 opacity-0 animate-[fade-in-up_0.8s_ease-out_forwards]">
@@ -54,9 +54,10 @@ export function HeroSection() {
                     </div>
 
                     {/* Headline */}
-                    <h1 className="opacity-0 animate-[fade-in-up_0.8s_ease-out_0.1s_forwards] font-serif font-medium leading-[1.1] text-white tracking-tight text-4xl xs:text-5xl sm:text-[3.75rem] md:text-[4.5rem] lg:text-[5.5rem] xl:text-[6rem]">
+                    {/* Headline */}
+                    <h1 className="opacity-0 animate-[fade-in-up_0.8s_ease-out_0.1s_forwards] font-serif font-medium leading-[0.9] text-white tracking-tight text-4xl xs:text-5xl sm:text-[4rem] md:text-[5rem] lg:text-[7rem] xl:text-[8.5rem] mb-6">
                         {HERO_CONTENT.headline} <br />
-                        <span className="text-gold italic font-normal pb-6 pr-4 inline-block -mb-6 tracking-tight drop-shadow-sm">
+                        <span className="text-gold italic font-normal inline-block tracking-tight drop-shadow-sm">
                             {HERO_CONTENT.headlineHighlight}
                         </span>
                     </h1>
@@ -115,37 +116,37 @@ export function HeroSection() {
                     </div>
                 </motion.div>
 
-                {/* Right: Floating Glass Cards — Desktop only */}
+                {/* Right: Floating Glass Cards — Desktop only (Adjusted coordinates) */}
                 <motion.div
-                    className="lg:col-span-4 relative h-[600px] hidden lg:block"
+                    className="lg:col-span-5 relative h-[700px] hidden lg:block"
                 >
                     <motion.div
-                        initial={{ opacity: 0, scale: 0.8 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 1.2, delay: 0.5 }}
-                        className="absolute top-20 right-0 z-20"
+                        initial={{ opacity: 0, scale: 0.8, x: 50 }}
+                        animate={{ opacity: 1, scale: 1, x: 0 }}
+                        transition={{ duration: 1.2, delay: 0.5, ease: "easeOut" }}
+                        className="absolute top-24 right-0 z-20"
                     >
-                        <div className="w-64 backdrop-blur-md bg-white/5 border border-white/10 p-6 rounded-2xl shadow-2xl">
-                            <div className="h-10 w-10 bg-gold/20 rounded-full flex items-center justify-center mb-4 text-gold">
-                                <GraduationCap size={20} strokeWidth={1.5} />
+                        <div className="w-80 backdrop-blur-2xl bg-[#142f2f]/80 border border-white/5 p-8 rounded-3xl shadow-deep-elevation transform rotate-[-2deg] hover:rotate-0 transition-transform duration-500">
+                            <div className="h-12 w-12 bg-white/5 rounded-full flex items-center justify-center mb-5 text-gold border border-white/10">
+                                <GraduationCap size={24} strokeWidth={1.2} />
                             </div>
-                            <h3 className="text-white font-serif text-2xl">USP-RP</h3>
-                            <p className="text-white/50 text-sm mt-1">Formação de Excelência</p>
+                            <h3 className="text-white font-serif text-3xl mb-1">USP-RP</h3>
+                            <p className="text-white/40 text-sm font-light uppercase tracking-widest">Formação de Excelência</p>
                         </div>
                     </motion.div>
 
                     <motion.div
-                        initial={{ opacity: 0, scale: 0.8 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 1.2, delay: 0.7 }}
-                        className="absolute bottom-40 -left-10 z-30"
+                        initial={{ opacity: 0, scale: 0.8, x: -50 }}
+                        animate={{ opacity: 1, scale: 1, x: 0 }}
+                        transition={{ duration: 1.2, delay: 0.7, ease: "easeOut" }}
+                        className="absolute bottom-32 left-0 z-30"
                     >
-                        <div className="w-72 backdrop-blur-md bg-gold/10 border border-gold/20 p-6 rounded-2xl shadow-2xl">
-                            <div className="h-10 w-10 bg-white/10 rounded-full flex items-center justify-center mb-4 text-gold">
-                                <Globe size={20} strokeWidth={1.5} />
+                        <div className="w-80 backdrop-blur-md bg-gold/5 border border-gold/10 p-8 rounded-3xl shadow-2xl transform rotate-[2deg] hover:rotate-0 transition-transform duration-500">
+                            <div className="h-12 w-12 bg-gold/10 rounded-full flex items-center justify-center mb-5 text-gold border border-gold/20">
+                                <Globe size={24} strokeWidth={1.2} />
                             </div>
-                            <h3 className="text-gold font-serif text-2xl">Internacional</h3>
-                            <p className="text-white/60 text-sm mt-1">Fellowship em Nápoles</p>
+                            <h3 className="text-gold font-serif text-3xl mb-1">Internacional</h3>
+                            <p className="text-white/50 text-sm font-light uppercase tracking-widest">Fellowship em Nápoles</p>
                         </div>
                     </motion.div>
                 </motion.div>
