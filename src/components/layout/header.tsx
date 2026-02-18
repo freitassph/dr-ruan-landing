@@ -91,14 +91,15 @@ export function Header() {
                 </nav>
 
                 {/* Mobile Hamburger — Aumentado para 56px touch target */}
+                {/* Mobile Hamburger — Otimizado para Toque e Visibilidade */}
                 <button
-                    className="lg:hidden relative z-50 w-14 h-14 flex flex-col justify-center items-center gap-[6px] focus:outline-none cursor-pointer active:scale-95 transition-transform"
+                    className="lg:hidden relative z-[100] w-14 h-14 rounded-full flex flex-col justify-center items-center gap-[6px] focus:outline-none cursor-pointer active:scale-95 active:bg-white/10 transition-all duration-200 -mr-2"
                     onClick={() => setIsMobileMenuOpen(true)}
-                    aria-label="Abrir menu"
+                    aria-label="Abrir menu de navegação"
                 >
-                    <span className="w-6 h-[1.5px] bg-white block transition-all duration-300 pointer-events-none" />
-                    <span className="w-4 h-[1.5px] bg-white/70 block ml-auto transition-all duration-300 pointer-events-none" />
-                    <span className="w-6 h-[1.5px] bg-white block transition-all duration-300 pointer-events-none" />
+                    <span className="w-7 h-[2px] bg-white block rounded-full transition-all duration-300" />
+                    <span className="w-5 h-[2px] bg-white/90 block ml-2 rounded-full transition-all duration-300" />
+                    <span className="w-7 h-[2px] bg-white block rounded-full transition-all duration-300" />
                 </button>
             </div>
 
